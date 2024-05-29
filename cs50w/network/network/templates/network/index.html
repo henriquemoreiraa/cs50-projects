@@ -1,0 +1,35 @@
+{% extends "network/layout.html" %} {% block body %}
+<input id="logged-user" value="{{ user }}" hidden />
+<h1>All Posts</h1>
+<form
+  class="flex flex-col border border-zinc-300 rounded-sm p-3"
+  id="new-post-form"
+>
+  <label class="font-semibold" for="new-post">New Post</label>
+  <textarea required id="new-post"></textarea>
+  <button type="submit" class="btn self-end mt-3">Post</button>
+</form>
+<form
+  class="flex flex-col border border-zinc-300 rounded-sm p-3"
+  style="display: none"
+  id="edit-post-form"
+>
+  <label class="font-semibold" for="edit-post">Edit Post</label>
+  <textarea required id="edit-post"></textarea>
+  <button class="btn self-end mt-3" type="submit">Save</button>
+</form>
+<div id="posts-view"></div>
+<div class="flex justify-between w-full">
+  <button
+    style="display: none"
+    class="btn-inverted"
+    type="button"
+    id="previous-page-btn"
+  >
+    Previous Page
+  </button>
+  <button type="button" id="next-page-btn" class="btn ml-auto">
+    Next Page
+  </button>
+</div>
+{% endblock %}

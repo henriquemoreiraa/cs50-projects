@@ -1,0 +1,136 @@
+{% extends "sheets/layout.html" %} {% load sheets_extras %} {% block body %}
+<div class="mt-5 flex gap-5">
+  <div class="w-[220px] h-[280px] border">
+    <img
+      class="object-contain w-full h-full bg-white"
+      src="/{{sheet.img}}"
+      alt="sheet"
+    />
+  </div>
+  <div class="flex-1">
+    <div class="flex justify-between items-center w-full">
+      <div class="flex gap-1">
+        <a
+          class="font-semibold text-2xl underline"
+          href="{{ sheet.sheet_url }}"
+          target="_blank"
+          >{{ sheet.name }}</a
+        >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 -960 960 960"
+          width="16px"
+          fill="#e8eaed"
+        >
+          <path
+            d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h560v-280h80v280q0 33-23.5 56.5T760-120H200Zm188-212-56-56 372-372H560v-80h280v280h-80v-144L388-332Z"
+          />
+        </svg>
+      </div>
+      <p class="text-sm text-zinc-400 flex gap-1 items-center">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 -960 960 960"
+          width="16px"
+          fill="#a1a1aa"
+        >
+          <path
+            d="m612-292 56-56-148-148v-184h-80v216l172 172ZM480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-400Zm0 320q133 0 226.5-93.5T800-480q0-133-93.5-226.5T480-800q-133 0-226.5 93.5T160-480q0 133 93.5 226.5T480-160Z"
+          />
+        </svg>
+        {{ sheet.timestamp }}
+      </p>
+    </div>
+    <p>Number of attempts: {{attempts|length}}</p>
+  </div>
+</div>
+<div>
+  {% if user.is_authenticated %}
+  <h2>New attempt</h2>
+  <form
+    class="flex flex-col gap-3 border rounded-md p-5 pb-2"
+    method="post"
+    enctype="multipart/form-data"
+    action="/attempt/{{ sheet.id }}"
+  >
+    {% csrf_token %} {{ form }}
+    <button class="self-end w-fit btn" type="submit">Submit</button>
+    <p class="text-red-500">{{ error }}</p>
+  </form>
+  {% endif %}
+</div>
+<div>
+  <div class="flex justify-between items-center mb-5">
+    <h2>{{ sheet.name|capitalize }} attempt</h2>
+    <select class="sort-select w-fit h-fit">
+      <option value="rating">Sorted by rating</option>
+      <option value="date">Sorted by date</option>
+    </select>
+  </div>
+  {% for attempt in attempts %}
+  <div class="border-b pb-5 mb-5">
+    <div class="flex justify-between items-center">
+      <p class="text-lg font-medium ml-1">{{ attempt.username }}</p>
+      <p class="text-sm text-zinc-400 flex gap-1 items-center">
+        {{ attempt.timestamp }}
+      </p>
+    </div>
+    <audio controls src="/{{ attempt.audio }}"></audio>
+    <div class="flex ml-1 mt-3 items-center justify-between">
+      <div class="flex items-center gap-1">
+        <div class="flex">
+          {% for i in 6|range_custom %} {% if attempt.rating >= i %}
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="ionicon"
+            viewBox="0 0 512 512"
+            width="18px"
+            fill="#60a5fa"
+          >
+            <path
+              d="M394 480a16 16 0 01-9.39-3L256 383.76 127.39 477a16 16 0 01-24.55-18.08L153 310.35 23 221.2a16 16 0 019-29.2h160.38l48.4-148.95a16 16 0 0130.44 0l48.4 149H480a16 16 0 019.05 29.2L359 310.35l50.13 148.53A16 16 0 01394 480z"
+            />
+          </svg>
+          {% else %}
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="ionicon"
+            width="18px"
+            viewBox="0 0 512 512"
+          >
+            <path
+              d="M480 208H308L256 48l-52 160H32l140 96-54 160 138-100 138 100-54-160z"
+              fill="none"
+              stroke="currentColor"
+              stroke-linejoin="round"
+              stroke-width="32"
+            />
+          </svg>
+          {% endif %} {% endfor %}
+        </div>
+        <span>{{ attempt.rating }}</span>
+        <span>({{ attempt.ratings|length }})</span>
+      </div>
+      {% if user.is_authenticated %}
+      <div class="flex gap-3 items-center self-end">
+        {% if attempt.user_rated %}
+        <p>Sheet already rated</p>
+        {% else %}
+        <select class="rate-select p-0 w-fit h-fit" name="{{ attempt.id }}">
+          <option>Rate this sheet</option>
+          {% for i in 6|range_custom %}
+          <option value="{{ i }}">{{ i }}</option>
+          {% endfor %}
+        </select>
+        {% endif %}
+      </div>
+      {% endif %}
+    </div>
+  </div>
+  {% empty %}
+  <p>No attempts</p>
+  {% endfor %}
+</div>
+{% endblock %} {% load static %} {% block script %}
+<script src="{% static 'sheets/sheet.js' %}"></script>
+{% endblock %}

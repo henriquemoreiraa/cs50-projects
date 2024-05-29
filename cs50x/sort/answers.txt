@@ -1,0 +1,22 @@
+sort1 uses: Bubble sort
+
+How do you know?: Testing with the given files we see that sort1 takes
+longer time than the two others. If we analyse the time complexity of bubble
+sort, we will see that it takes longer to sort compared to others. Because
+it has a time complexity of O(n²), which is slower.
+
+sort2 uses: Merge sort
+
+How do you know?: Testing again, but now with sort2, we can see that it's
+the fastest way to sort, leaving us with no other choice than merge sort.
+Just like above if we analyse the time complexity of merge sort, it has a
+time complexity of O(n log n), which is the fastest option.
+
+sort3 uses: Selection sort
+
+How do you know?: Last but no least, we see that sort3 it's a little faster
+than sort1 (bubble sort) and slower than sort2 (merge sort). Leaving us with
+selection sort, that it has a time complexity of O(n²), which is slower, but
+not as slow than bubble sort, because as showed on the end of the class,
+selection sort is faster than bubble sort even though it's the same time
+complexity.

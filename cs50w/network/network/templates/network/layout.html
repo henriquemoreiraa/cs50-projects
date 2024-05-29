@@ -1,0 +1,84 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>{% block title %}Social Network{% endblock %}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style type="text/tailwindcss">
+      @layer base {
+        h1,
+        h2,
+        h3,
+        h4,
+        p {
+          @apply my-2;
+        }
+        h1 {
+          @apply text-5xl font-semibold;
+        }
+        h2 {
+          @apply text-3xl font-semibold;
+        }
+        h3 {
+          @apply text-xl font-semibold;
+        }
+        h4 {
+          @apply text-lg font-semibold;
+        }
+        .btn {
+          @apply px-3 py-[4px] rounded-md bg-blue-500 text-white text-sm;
+        }
+
+        .btn-inverted {
+          @apply border border-blue-500 px-3 py-[4px] text-blue-500 rounded-md hover:border-white hover:bg-blue-500 hover:text-white transition-all duration-100 text-sm;
+        }
+        input,
+        textarea,
+        select {
+          @apply border border-zinc-200 rounded-md pl-1 py-1 w-full;
+        }
+      }
+    </style>
+    <link href="{% static 'network/styles.css' %}" rel="stylesheet" />
+  </head>
+  <body class="p-5">
+    <nav class="flex justify-between mb-2">
+      <a class="text-xl" href="#">Network</a>
+      <div>
+        <ul class="flex gap-3 flex-col md:flex-row">
+          {% if user.is_authenticated %}
+          <li class="nav-item">
+            <a class="nav-link" href="/profile/{{ user }}"
+              ><strong>{{ user.username }}</strong></a
+            >
+          </li>
+          {% endif %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'index' %}">All Posts</a>
+          </li>
+          {% if user.is_authenticated %}
+          <li class="nav-item">
+            <a class="nav-link" href="/following">Following</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'logout' %}">Log Out</a>
+          </li>
+          {% else %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'login' %}">Log In</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'register' %}">Register</a>
+          </li>
+          {% endif %}
+        </ul>
+      </div>
+    </nav>
+
+    <div class="flex gap-5 flex-col" class="body">
+      {% block body %} {% endblock %}
+    </div>
+  </body>
+  <script src="{% static 'network/index.js' %}"></script>
+</html>

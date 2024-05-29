@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Advanced Search</title>
+    <link rel="stylesheet" href="/index.css" />
+  </head>
+  <body>
+    <div style="display: flex; justify-content: flex-end; gap: 1rem">
+      <a href="./index.html">Google Search</a>
+    </div>
+    <div
+      style="
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+      "
+    >
+      <h1>Google Advanced Search</h1>
+      <form
+        style="
+          display: flex;
+          flex-direction: column;
+          max-width: 500px;
+          width: 100%;
+          gap: 1rem;
+        "
+        action="https://www.google.com/search"
+      >
+        <h1 style="font-size: 1.4rem">Localizar páginas com...</h1>
+        <div style="width: 100%; display: flex; gap: 0.5rem">
+          <label style="width: 230px" for="as_q">all these words:</label>
+          <input
+            id="as_q"
+            style="flex: 1; border: 1px solid gainsboro"
+            type="text"
+            name="as_q"
+          />
+        </div>
+        <div style="width: 100%; display: flex; gap: 0.5rem">
+          <label style="width: 230px" for="as_epq"
+            >this exact word or phrase:</label
+          >
+          <input
+            id="as_epq"
+            style="flex: 1; border: 1px solid gainsboro"
+            type="text"
+            name="as_epq"
+          />
+        </div>
+        <div style="width: 100%; display: flex; gap: 0.5rem">
+          <label style="width: 230px" for="as_oq"
+            >any of these words:</label
+          >
+          <input
+            id="as_oq"
+            style="flex: 1; border: 1px solid gainsboro"
+            type="text"
+            name="as_oq"
+          />
+        </div>
+        <div style="width: 100%; display: flex; gap: 0.5rem">
+          <label style="width: 230px" for="as_eq"
+            >none of these words:
+          </label>
+          <input
+            id="as_eq"
+            style="flex: 1; border: 1px solid gainsboro"
+            type="text"
+            name="as_eq"
+          />
+        </div>
+        <input
+          style="
+            width: 150px;
+            align-self: center;
+            padding: 0.5rem;
+            background-color: #5899ff;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            margin-top: 1rem;
+            cursor: pointer;
+          "
+          type="submit"
+          value="Advanced Search"
+        />
+      </form>
+    </div>
+  </body>
+</html>

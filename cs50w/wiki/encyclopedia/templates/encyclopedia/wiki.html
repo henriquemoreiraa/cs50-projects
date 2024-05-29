@@ -1,0 +1,13 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+    Wiki {{ title }}
+{% endblock %}
+
+{% block body %}
+    <div class="d-flex justify-content-end pr-4">
+        <a href="/edit-page/{{ title }}">Edit page</a>
+    </div>
+    {{ content|safe }}
+
+{% endblock %}

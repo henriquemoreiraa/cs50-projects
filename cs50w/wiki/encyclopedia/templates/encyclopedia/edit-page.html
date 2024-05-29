@@ -1,0 +1,16 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+  Edit Page
+{% endblock %}
+
+{% block body %}
+<h1>Edit Page</h1>
+
+<form method="post" class="d-flex flex-column">
+  {% csrf_token %}
+  {{ form }}
+  <input class="align-self-end mr-4" type="submit">
+</form>
+
+{% endblock %}

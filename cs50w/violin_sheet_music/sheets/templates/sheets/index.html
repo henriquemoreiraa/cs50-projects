@@ -1,0 +1,39 @@
+{% extends "sheets/layout.html" %} {% load static %} {% block body %}
+<form class="flex gap-3 mt-5">
+  <input
+    placeholder="Type a sheet name"
+    type="text"
+    id="search"
+    name="search"
+  />
+  <button type="submit" class="btn">Search</button>
+</form>
+<div
+  id="sheets-view"
+  class="flex flex-wrap gap-3 justify-center sm:justify-start"
+></div>
+<div class="flex justify-center gap-3 w-full">
+  <div id="first-page" style="display: none">
+    <button type="button" id="first-page-btn" class="btn-inverted"></button>
+    <span class="ml-2">...</span>
+  </div>
+  <button
+    style="display: none"
+    class="btn-inverted"
+    type="button"
+    id="previous-page-btn"
+  ></button>
+  <button class="btn" type="button" id="current-page-btn"></button>
+  <button
+    type="button"
+    id="next-page-btn"
+    style="display: none"
+    class="btn-inverted"
+  ></button>
+  <div id="last-page" style="display: none">
+    <span class="mr-2">...</span>
+    <button type="button" id="last-page-btn" class="btn-inverted"></button>
+  </div>
+</div>
+<script src="{% static 'sheets/index.js' %}"></script>
+{% endblock %}

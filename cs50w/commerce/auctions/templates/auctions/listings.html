@@ -1,0 +1,113 @@
+{% extends "auctions/layout.html" %}
+
+{% load auction_extras %}
+
+{% block body %}
+    {% if last_bid and listings.is_closed and user.pk == last_bid.user.pk %}
+        <div class="border border-green-500 bg-green-100 rounded-md p-2">
+
+            <p>Congratulations <b>{{ user }}</b> you won this auction with a bid of {{ last_bid.bid|format_currency }}!</p>
+        </div>
+    {% endif %}
+    <h2>Listing: {{ listings.title }} 
+        {% if listings.is_closed %}
+            (CLOSED)
+        {% endif %}
+    </h2>
+    <div class="flex flex-col">
+        {% if user.is_authenticated %}
+            {% if user.pk != listings.user.pk %}
+                <form class="self-end" method="post" action="{% url 'watchlist' %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="listings_pk" value="{{ listings.pk }}"> 
+                    <button type="submit" class="btn-primary">
+                        {% if watchlist %}
+                            Remove from watchlist
+                        {% else %}
+                            Add to watchlist
+                        {% endif %}
+                    </button>     
+                </form>
+            {% else %}
+                <form class="self-end" method="post" action="{% url 'close_listing' listings.pk %}">
+                    {% csrf_token %}
+                    {% if listings.is_closed %}
+                        <button disabled type="submit" class="btn-disabled">
+                            Close   
+                        </button>     
+                    {% else %}
+                        <button type="submit" class="btn-primary">
+                            Close   
+                        </button>  
+                    {% endif %}
+                </form>
+            {% endif %}
+        {% endif %}
+        {% if listings.image_url %}
+            <img width="250px" class="self-center" src="{{ listings.image_url }}" alt="Listings image">
+        {% endif %}  
+        <div class="flex justify-between gap-2">
+            <p>{{ listings.description }}</p>
+            <p class="text-zinc-400 text-sm ">Created {{ listings.timestamp }}</p>
+        </div>     
+    </div>
+    <div class="flex flex-col gap-10">
+        <div class="mt-5">
+            <h3>Bid</h3>
+            <h4>Starting bid {{ listings.starting_bid|format_currency }}</h4>
+            {% if last_bid %}
+                <h4>Minimum bid {{ last_bid.bid|format_currency }}</h4>
+            {% endif %}
+            {% if user.is_authenticated and listings.is_closed == None %}
+            <form action="{% url 'bid' listings.pk %}" method="post" >
+                {% csrf_token %}
+                <label for="bid">{{ num_bids }} bid(s) so far. 
+                    {% if last_bid and last_bid.user.pk == user.pk %} 
+                    Your bid is the current bid.
+                    {% endif %}
+                </label>
+                <input type="text" name="bid" id="bid" placeholder="Bid" required/>
+                <button type="submit" class="btn-primary">Place Bid</button>
+                {{ message }}
+            </form>
+            {% endif %}
+        </div>
+        <div>
+            <h3>Details</h3>
+            <ul class="list-disc ml-5">
+                <li><b>Listed by:</b> {{ listings.user }}</li>
+                <li><b>Category:</b>
+                    {% if listings.category %} 
+                        {{ listings.category.name }}    
+                    {% else %}
+                        No Category Listed
+                    {% endif %}
+                </li>
+            </ul>
+        </div>
+        <div>
+            <h3>Comments</h3>
+            {% if user.is_authenticated and listings.is_closed == None %}
+                <form action="{% url 'comment' listings.pk %}" method="post">
+                    {% csrf_token %}
+                    <label for="comment">Comment</label>
+                    <textarea cols="50" rows="5" type="text" name="comment" id="comment" required></textarea>
+                    <button type="submit" class="btn-primary">Send</button>
+                </form>
+            {% endif %}
+            {% for comment in comments %}
+                <div class="mt-5 border border-zinc-200 p-3">
+                    <div class="flex justify-between">
+                        <p><b>{{ comment.user }}</b></p>
+                        <p class="text-zinc-400 text-sm ">{{ comment.timestamp }}</p>
+                    </div>
+                    <p>{{ comment.comment }}</p>
+                </div>
+            {% empty %}
+                No comments
+            {% endfor %}
+        </div>
+    </div>
+    
+{% endblock %}
+

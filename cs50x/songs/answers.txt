@@ -1,0 +1,6 @@
+I would give each aura a value, and then based on the the value of average, energy,
+valence, and danceability, I would calculate and search for a aura value that is equals
+to this calculated value.
+
+Maybe I could give each song a column "aura" and then get the aura average from
+the 100 songs.

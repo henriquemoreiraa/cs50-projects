@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Search</title>
+    <link rel="stylesheet" href="/index.css" />
+  </head>
+  <body>
+    <div style="display: flex; justify-content: flex-end; gap: 1rem">
+      <a href="./image-search.html">Image Search</a>
+      <a href="./advanced-search.html">Advanced Search</a>
+    </div>
+    <div
+      style="
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+      "
+    >
+      <h1>Google Search</h1>
+      <form
+        style="
+          display: flex;
+          flex-direction: column;
+          max-width: 500px;
+          width: 100%;
+          gap: 1rem;
+        "
+        action="https://google.com/search"
+      >
+        <input
+          style="
+            border-radius: 8px;
+            border: 1px solid gainsboro;
+            padding: 0.8rem 0.8rem;
+          "
+          type="text"
+          name="q"
+        />
+        <div
+          style="
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+          "
+        >
+          <input
+            style="
+              width: 150px;
+              align-self: center;
+              padding: 0.5rem;
+              background-color: gainsboro;
+              border: none;
+              border-radius: 3px;
+              cursor: pointer;
+            "
+            type="submit"
+            value="Google Search"
+            name="btnK"
+          />
+          <input
+            style="
+              width: 150px;
+              align-self: center;
+              padding: 0.5rem;
+              background-color: gainsboro;
+              border: none;
+              border-radius: 3px;
+              cursor: pointer;
+            "
+            type="submit"
+            value="I’m Feeling Lucky"
+            name="btnI"
+          />
+        </div>
+      </form>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,19 @@
+{% extends "network/layout.html" %} {% load static %} {% block body %}
+<input id="logged-user" value="{{ user }}" hidden />
+<div id="user-profile"></div>
+<h1 id="user-posts"></h1>
+<div id="posts-view"></div>
+<div class="flex justify-between w-full">
+  <button
+    style="display: none"
+    class="btn-inverted"
+    type="button"
+    id="previous-page-btn"
+  >
+    Previous Page
+  </button>
+  <button type="button" id="next-page-btn" class="btn ml-auto">
+    Next Page
+  </button>
+</div>
+{% endblock %}

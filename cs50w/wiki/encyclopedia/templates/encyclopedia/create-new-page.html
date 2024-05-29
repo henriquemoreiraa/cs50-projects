@@ -1,0 +1,22 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% load static %}
+
+{% block title %}
+  Create New Page
+{% endblock %}
+
+{% block head %}
+  <link href="{% static 'encyclopedia/styles.css' %}" rel="stylesheet" />
+{% endblock %}
+
+{% block body %}
+<h1>Create New Page</h1>
+
+<form method="post" class="d-flex flex-column">
+  {% csrf_token %}
+  {{ form }}
+  <input class="align-self-end mr-4" type="submit">
+</form>
+
+{% endblock %}

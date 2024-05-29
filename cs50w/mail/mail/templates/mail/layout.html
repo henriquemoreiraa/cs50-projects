@@ -1,0 +1,47 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>{% block title %}Mail{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'mail/styles.css' %}" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style type="text/tailwindcss">
+      @layer base {
+        h1,
+        h2,
+        h3,
+        h4,
+        p {
+          @apply my-2;
+        }
+        h1 {
+          @apply text-5xl font-semibold;
+        }
+        h2 {
+          @apply text-3xl font-semibold;
+        }
+        h3 {
+          @apply text-xl font-semibold;
+        }
+        h4 {
+          @apply text-lg font-semibold;
+        }
+        .btn {
+          @apply border border-blue-500 px-2 py-[6px] text-blue-500 rounded-md hover:border-white hover:bg-blue-500 hover:text-white transition-all duration-300 text-sm;
+        }
+        input,
+        textarea,
+        select {
+          @apply border border-zinc-200 rounded-md pl-1 py-1 w-full;
+        }
+      }
+    </style>
+    {% block script %} {% endblock %}
+  </head>
+  <body class="flex justify-center">
+    <div class="max-w-screen-xl w-full p-5">
+      {% block body %} {% endblock %}
+    </div>
+  </body>
+</html>

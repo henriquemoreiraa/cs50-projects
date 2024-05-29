@@ -1,0 +1,79 @@
+{% load static %}
+
+{% load auction_extras %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>{% block title %}Auctions{% endblock %}</title>
+        {% comment %} <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"> {% endcomment %}
+        <link href="{% static 'auctions/styles.css' %}" rel="stylesheet" type="text/tailwindcss">
+        <script src="https://cdn.tailwindcss.com"></script>
+        <style type="text/tailwindcss">
+        @layer base {
+            h1,h2,h3,h4,p {
+                @apply my-2;
+            }
+            h1 {
+                @apply text-5xl font-semibold;
+            }
+            h2 {
+                @apply text-3xl font-semibold;
+            }
+            h3 {
+                @apply text-xl font-semibold;
+            }
+            h4 {
+                @apply text-lg font-semibold;
+            }
+            button {
+                @apply bg-blue-500 p-2 text-white rounded-md
+            }
+            input, textarea, select {
+                @apply border border-zinc-200 rounded-md pl-1 py-1
+            }
+        }
+        </style>
+    </head>
+    <body class=" p-3">
+        <h1 class=" font-semibold">Auctions</h1>
+        <div class="my-5">
+            {% if user.is_authenticated %}
+                Signed in as <strong>{{ user.username }}</strong>.
+            {% else %}
+                Not signed in.
+            {% endif %}
+        </div>
+        <ul class="flex gap-4">
+            <li>
+                <a class="text-blue-500 hover:underline" href="{% url 'index' %}">Active Listings</a>
+            </li>
+            <li>
+                <a class="text-blue-500 hover:underline" href="{% url 'categories' %}">Categories</a>
+            </li>
+            {% if user.is_authenticated %}
+                <li>
+                    <a class="text-blue-500 hover:underline" href="{% url 'watchlist' %}">Watchlist {{ user.pk|watchlist_len }}</a>
+                </li>
+                <li>
+                    <a class="text-blue-500 hover:underline" href="{% url 'create_listing' %}">Create listing</a>
+                </li>
+                <li>
+                    <a class="text-blue-500 hover:underline" href="{% url 'logout' %}">Log Out</a>
+                </li>
+            {% else %}
+                <li>
+                    <a class="text-blue-500 hover:underline" href="{% url 'login' %}">Log In</a>
+                </li>
+                <li>
+                    <a class="text-blue-500 hover:underline" href="{% url 'register' %}">Register</a>
+                </li>
+            {% endif %}
+        </ul>
+        <hr>
+        <div class="mt-5">
+            {% block body %}
+        </div>
+        {% endblock %}
+    </body>
+</html>

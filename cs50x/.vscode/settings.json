@@ -1,0 +1,10 @@
+{
+    "gitdoc.enabled": true,
+    "files.associations": {
+        "system_error": "c",
+        "algorithm": "c",
+        "random": "c",
+        "stdlib.h": "c",
+        "dictionary.h": "c"
+    }
+}

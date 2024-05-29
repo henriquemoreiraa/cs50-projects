@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Image Search</title>
+    <link rel="stylesheet" href="/index.css" />
+  </head>
+  <body>
+    <div style="display: flex; justify-content: flex-end; gap: 1rem">
+      <a href="./index.html">Google Search</a>
+    </div>
+    <div
+      style="
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+      "
+    >
+      <h1>Google Image Search</h1>
+      <form
+        style="
+          display: flex;
+          flex-direction: column;
+          max-width: 500px;
+          width: 100%;
+          gap: 1rem;
+        "
+        action="http://images.google.com/images"
+      >
+        <input
+          style="
+            border-radius: 8px;
+            border: 1px solid gainsboro;
+            padding: 0.8rem 0.8rem;
+          "
+          type="text"
+          name="q"
+        />
+        <input
+          style="
+            width: 150px;
+            align-self: center;
+            padding: 0.5rem;
+            background-color: gainsboro;
+            border: none;
+            border-radius: 3px;
+            margin-top: 1rem;
+            cursor: pointer;
+          "
+          type="submit"
+          value="Image Search"
+        />
+      </form>
+    </div>
+  </body>
+</html>

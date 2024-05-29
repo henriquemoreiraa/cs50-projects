@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Home
+{% endblock %}
+
+{% block main %}
+    <div class="mb-3 px-5">
+        {% if user_portfolio %}
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">Symbol</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Share</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">TOTAL</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for quote in user_portfolio %}
+                        <tr>
+                            <td>{{ quote.symbol }}</td>
+                            <td>{{ quote.name }}</td>
+                            <td>{{ quote.quantity }}</td>
+                            <td>{{ quote.price }}</td>
+                            <td>{{ quote.total }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <div class="d-flex justify-content-end">
+                <div class="w-25">
+                    <div class="w-50 d-flex justify-content-between"><b>Cash</b> {{ user_portfolio[0].cash }}</div>
+                    <div class="w-50 d-flex justify-content-between"><b>TOTAL</b> {{ total }}</div>
+                </div>
+            </div>
+        {% else  %}
+            <h1>Nothing to show</h1>
+        {% endif %}
+    </div>
+{% endblock %}

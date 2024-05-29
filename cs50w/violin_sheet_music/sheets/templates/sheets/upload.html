@@ -1,0 +1,7 @@
+{% extends "sheets/layout.html" %} {% block body %}
+<form class="flex flex-col gap-3" method="post" enctype="multipart/form-data">
+  {% csrf_token %} {{ form }}
+  <button class="self-end w-fit btn" type="submit">Submit</button>
+  <p class="text-red-500">{{ error }}</p>
+</form>
+{% endblock %}

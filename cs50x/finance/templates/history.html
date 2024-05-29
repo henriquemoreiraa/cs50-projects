@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    History
+{% endblock %}
+
+{% block main %}
+    <div class="mb-3 px-5">
+        {% if transactions %}
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">Symbol</th>
+                        <th scope="col">Transaction type</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for transaction in transactions %}
+                        <tr>
+                            <td>{{ transaction.symbol }}</td>
+                            <td>
+                                {% if transaction.type == 'buy' %}
+                                    Purchase
+                                {% else %}
+                                    Sale
+                                {% endif %}
+                            </td>
+                            <td>{{ transaction.quantity }}</td>
+                            <td>{{ transaction.price }}</td>
+                            <td>{{ transaction.timestamp }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <h1>Nothing to show</h1>
+        {% endif %}
+    </div>
+{% endblock %}

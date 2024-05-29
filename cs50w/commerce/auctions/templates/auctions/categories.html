@@ -1,0 +1,21 @@
+{% extends "auctions/layout.html" %}
+
+{% load auction_extras %}
+
+{% block body %}
+    <h2>Categories</h2>
+
+    <ul class="list-disc ml-5">
+        {% for category in categories %}
+            <li> 
+                <a href="/?category={{ category.pk }}">
+                    {{ category.name }}
+                </a> 
+            </li>
+        {% empty %}
+        <li> 
+            No categories.
+        </li>   
+        {% endfor %}
+    </ul>
+{% endblock %}

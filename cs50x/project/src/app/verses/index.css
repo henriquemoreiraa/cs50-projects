@@ -1,0 +1,84 @@
+.verses-container::-webkit-scrollbar {
+  display: none;
+}
+
+.verse-section {
+  background-attachment: fixed;
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-size: cover;
+  transition: all;
+  transition-duration: 200ms;
+}
+
+.nt {
+  background-image: url("../../../public/new_testament.png");
+}
+
+.vt {
+  background-image: url("../../../public/old_testament.png");
+  background-color: #664d37 !important;
+}
+
+.scroll {
+  width: 40px;
+  height: 58px;
+  position: relative;
+  box-sizing: border-box;
+  border: 2px solid #fff;
+  margin: auto;
+  border-radius: 50% 50% 50% 50% / 25% 25% 25% 25%;
+  animation: down 1.5s linear infinite;
+}
+
+.scroll::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 10px;
+  transform: translateX(-50%);
+  width: 2px;
+  height: 12px;
+  background: #fff;
+  border-radius: 10px;
+  animation: scrollDown 1.5s linear infinite;
+}
+@keyframes scrollDown {
+  0% {
+    top: 15px;
+    height: 4px;
+    opacity: 1;
+  }
+  33% {
+    top: 15px;
+    height: 20px;
+  }
+  66% {
+    top: 30px;
+    height: 10px;
+    opacity: 1;
+  }
+  100% {
+    top: 40px;
+    height: 4px;
+    opacity: 0;
+  }
+}
+
+@keyframes down {
+  0% {
+    top: 10px;
+  }
+  25% {
+    top: 14px;
+  }
+  50% {
+    top: 18px;
+  }
+  75% {
+    top: 14px;
+  }
+  100% {
+    top: 10px;
+  }
+}
